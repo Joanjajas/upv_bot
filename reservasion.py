@@ -1,8 +1,8 @@
 from getpass import getpass
-import datetime
 import sys
 
 from playwright.sync_api import sync_playwright
+from date import get_day_of_week_spanish
 
 UPV_LOGIN_URL = "https://intranet.upv.es/"
 USERNAME = "20934366"
@@ -10,12 +10,9 @@ PASSWORD = "cuswiw-sukti0-hehbEv"
 
 
 def run(playwright):
-    # sport = input("Deporte: ").upper()
-    # date = get_day_of_week_spanish(input("Fecha (dd/mm/yyyy): "))
-    sport = "PADEL"
-    date = get_day_of_week_spanish("20/10/2023")
-
-    print(date)
+    sport = input("Deporte: ").upper()
+    date = get_day_of_week_spanish(input("Fecha (dd/mm/yyyy): "))
+    time = input("Hora (hh:mm-hh:mm): ")
 
     # Create a new instance of chromium and open a new page
     chromium = playwright.chromium
@@ -32,40 +29,26 @@ def run(playwright):
     goto_revervations(page)
 
     # Make the reservation
-    make_reservation(page, sport, date)
+    make_reservation(page, sport, date, time)
 
     input("")
 
 
-def make_reservation(page, sport, date):
-    try:
-        # Select the sport
-        page.locator(f"//select[@name='deporte']").select_option(sport)
+def make_reservation(page, sport, date, time):
+    print("Making reservation...")
 
-        # Select the day
-        print(date)
-        page.get_by_text(date).click()
+    # Select the sport
+    page.locator(f"//select[@name='deporte']").select_option(sport)
 
-    except Exception as err:
-        print(f"Error ocurred while selecting sport: {err}", file=sys.stderr)
-        exit(1)
+    # Select the day
+    page.get_by_role("button", name=date).click()
 
-
-# Function to get the name of the day of the week in Spanish
-def get_day_of_week_spanish(date):
-    days_of_week = [
-        "Lunes",
-        "Martes",
-        "Miércoles",
-        "Jueves",
-        "Viernes",
-        "Sábado",
-        "Domingo",
-    ]
-    date_obj = datetime.datetime.strptime(date, "%d/%m/%Y")
-    day_of_week = days_of_week[date_obj.weekday()]
-
-    return f"{day_of_week} {date}"
+    # Select the time
+    title = page.get_by_role("columnheader", name="PÁDEL EXTERIOR 1")
+    tabla = title.locator("xpath=ancestor::table")
+    tabla.get_by_role("row", name=f"{time} Libre", exact=True).get_by_role(
+        "link"
+    ).click()
 
 
 def goto_revervations(page):
@@ -76,10 +59,7 @@ def goto_revervations(page):
         page.locator("//div[@id='intranet']//a[2]").click()
 
         # Enter reservation page
-        algo = page.locator(
-            "//div[@id='subgrupo_1000']//table[@id='elemento_1001']"
-        ).click()
-        print(algo)
+        page.locator("//div[@id='subgrupo_1000']//table[@id='elemento_1001']").click()
 
     except Exception as err:
         print(f"Error ocurred while navigating to reservations: {err}", file=sys.stderr)
