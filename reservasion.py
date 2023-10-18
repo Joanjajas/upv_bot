@@ -1,6 +1,7 @@
+import sys
+
 from playwright.sync_api import sync_playwright
 from playwright.sync_api import Playwright, Page
-import sys
 
 
 UPV_LOGIN_URL = "https://intranet.upv.es/"
@@ -21,7 +22,7 @@ class Reservation:
 
 RESERVATIONS = [
     Reservation("PADEL", "Sábado 21/10/2023", "08:00-09:00", "PÁDEL EXTERIOR 2"),
-    Reservation("TENIS", "Martes 24/10/2023", "08:00-09:00", "TENIS 1"),
+    Reservation("TENIS", "Martes 24/10/2023", "08:00-09:00", "TENIS 2"),
 ]
 
 
@@ -38,6 +39,49 @@ def run(playwright: Playwright):
 
     for reservation in RESERVATIONS:
         make_reservation(page, reservation)
+
+
+def login(page: Page, username: str, password: str):
+    print("Iniciando sesión...")
+
+    try:
+        # Go to the login page
+        page.goto(UPV_LOGIN_URL)
+
+        # Fill the login form and submit it
+        form = page.locator("form[name='alumno']")
+        form.locator("input[name='dni']").fill(username)
+        form.locator("input[name='clu']").fill(password)
+        form.locator("input[type='submit']").click()
+
+        # Check if the login was succesfull
+        assert page.title() == "Mi UPV"
+
+    except AssertionError:
+        print(
+            "Error al iniciar sesión. Asegurate de introducir un usuario y contraseña válidos",
+            file=sys.stderr,
+        )
+        exit(1)
+
+    except Exception as err:
+        print(f"Error al iniciar sesión: {err}", file=sys.stderr)
+        exit(1)
+
+
+def navigate_to_reservations(page: Page):
+    print("Navegando a reservas")
+
+    try:
+        # Enter intranet
+        page.locator("//div[@id='intranet']//a[2]").click()
+
+        # Enter reservation page
+        page.locator("//div[@id='subgrupo_1000']//table[@id='elemento_1001']").click()
+
+    except Exception as err:
+        print(f"Error al navegar a la pagina de reservas: {err}", file=sys.stderr)
+        exit(1)
 
 
 def make_reservation(page: Page, reservation: Reservation):
@@ -65,45 +109,6 @@ def make_reservation(page: Page, reservation: Reservation):
             f"Error al reservar la pista de {reservation.sport}: {err}",
             file=sys.stderr,
         )
-
-
-def navigate_to_reservations(page: Page):
-    print("Navegando a reservas")
-
-    try:
-        # Enter intranet
-        page.locator("//div[@id='intranet']//a[2]").click()
-
-        # Enter reservation page
-        page.locator("//div[@id='subgrupo_1000']//table[@id='elemento_1001']").click()
-
-    except Exception as err:
-        print(f"Error al navegar a la pagina de reservas: {err}", file=sys.stderr)
-        exit(1)
-
-
-def login(page: Page, username: str, password: str):
-    print("Iniciando sesión...")
-
-    try:
-        # Go to the login page
-        page.goto(UPV_LOGIN_URL)
-
-        # Fill the login form and submit it
-        form = page.locator("form[name='alumno']")
-        form.locator("input[name='dni']").fill(username)
-        form.locator("input[name='clau']").fill(password)
-        form.locator("input[type='submit']").click()
-
-        # Check if the login was succesfull
-        assert page.title() == "Mi UPV"
-
-    except AssertionError:
-        print(
-            "Error al iniciar sesión. Asegurate de introducir un usuario y contraseña válidos",
-            file=sys.stderr,
-        )
-        exit(1)
 
 
 if __name__ == "__main__":
