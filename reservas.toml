@@ -1,0 +1,13 @@
+# Las reservas deben seguir el siguiente formato:
+
+# [[reserva]]
+# deporte = "PADEL"
+# fecha = "Viernes 27/10/2023"
+# hora = "08:00-09:00"
+# pista = "PÁDEL EXTERIOR 3"
+
+# [[reserva]]
+# deporte = "TENIS"
+# fecha = "Lunes 23/10/2023"
+# hora = "12:00-13:00"
+# pista = "TENIS 3"
