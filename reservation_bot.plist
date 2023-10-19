@@ -8,7 +8,7 @@
         <key>ProgramArguments</key>
         <array>
             <string>/usr/bin/python3</string>
-            <string>~/Documents/upv_bot/bot.py</string>
+            <string>~/Documents/upv_bot/bot/bot.py</string>
         </array>
 
         <key>RunAtLoad</key>

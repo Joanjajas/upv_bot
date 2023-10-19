@@ -1,7 +1,7 @@
 from playwright.sync_api import sync_playwright
 from playwright.sync_api import Playwright, Page
 from reservation import load_from_toml_file
-from logger import log, create_log_file
+from logger import log
 
 
 UPV_LOGIN_URL = "https://intranet.upv.es/"
@@ -10,9 +10,6 @@ PASSWORD = "cuswiw-sukti0-hehbEv"
 
 
 def run(playwright: Playwright):
-    # Create log file fort the agent log
-    create_log_file("log.txt")
-
     # Get reservations from TOML file
     reservations = load_from_toml_file("reservas.toml")
 
