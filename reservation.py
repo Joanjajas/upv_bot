@@ -1,6 +1,7 @@
-import sys
+import toml
 
 from playwright.sync_api import Page
+from logger import log
 
 
 class Reservation:
@@ -30,13 +31,33 @@ class Reservation:
             ).get_by_role("link").click()
 
             page.get_by_role("button", name="Cancel").click()
-            print(self)
+            log(str(self))
 
         except Exception:
-            print(
+            log(
                 f"Error al reservar la pista de {self.sport}: La pista ya está reservada",
-                file=sys.stderr,
+                level="WARNING",
             )
 
     def __str__(self):
         return f"Reservada pista de {self.sport} el {self.date} de {self.time} en la pista {self.court}"
+
+
+def load_from_toml_file(file_path: str):
+    try:
+        data = toml.load(file_path)
+        reservations = data.get("reserva", [])
+
+        return [
+            Reservation(
+                reservation["deporte"],
+                reservation["fecha"],
+                reservation["hora"],
+                reservation["pista"],
+            )
+            for reservation in reservations
+        ]
+
+    except Exception as e:
+        log(f"Error leyendo las reservas: {e}", level="ERROR")
+        exit(1)
