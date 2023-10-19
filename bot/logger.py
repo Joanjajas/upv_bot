@@ -8,6 +8,6 @@ def log(text: str, level: str = "INFO"):
 
 
 def create_log_file(filename: str):
-    if not os.path.exists("../logs"):
+    if not os.path.exists(filename):
         with open(filename, "w") as f:
             f.write("")
