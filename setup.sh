@@ -18,5 +18,10 @@ fi
 /usr/bin/python3 -m pip install playwright
 /usr/bin/python3 -m playwright install chromium
 
+# if there is a previous version of the plist file, unload it
+if [ -f ~/Library/LaunchAgents/reservation_bot.plist ]; then
+	launchctl unload ~/Library/LaunchAgents/reservation_bot.plist
+fi
+
 cp "$plist_file" ~/Library/LaunchAgents/
 launchctl load ~/Library/LaunchAgents/reservation_bot.plist
