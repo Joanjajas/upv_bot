@@ -46,6 +46,9 @@ class Reservation:
 
 def load_from_toml_file(file_path: str):
     try:
+        home_dir = os.path.expanduser("~")
+        file_path = os.path.join(home_dir, file_path)
+
         # Load reservations from TOML file
         data = toml.load(file_path)
         reservations = data.get("reserva", [])
