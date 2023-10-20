@@ -8,17 +8,11 @@
         <key>ProgramArguments</key>
         <array>
             <string>/usr/bin/python3</string>
-            <string>~/Documents/upv_bot/bot/bot.py</string>
+            <string>/usr/local/bin/reservation_bot/bot.py</string>
         </array>
 
         <key>RunAtLoad</key>
         <false/>
-
-        <key>StandardOutPath</key>
-        <string>~/Documents/upv_bot/log.txt</string>
-
-        <key>StandardErrorPath</key>
-        <string>~/Documents/upv_bot/log.txt</string>
 
         <key>StartCalendarInterval</key>
         <dict>
