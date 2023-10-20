@@ -8,7 +8,7 @@ if [ ! -d ~/bot_reservas ]; then
 fi
 
 if [ ! -f ~/bot_reservas/reservas.toml ]; then
-	touch ~/bot_reservas/reservas.toml
+	cp "$script_dir/reservas.toml" ~/bot_reservas/ || touch ~/bot_reservas/reservas.toml
 fi
 
 if [ ! -d /usr/local/reservation_bot ]; then
