@@ -8,11 +8,11 @@
         <key>ProgramArguments</key>
         <array>
             <string>/usr/bin/python3</string>
-            <string>/usr/local/bin/reservation_bot/bot.py</string>
+            <string>/usr/local/reservation_bot/bot.py</string>
         </array>
 
         <key>RunAtLoad</key>
-        <false/>
+        <true/>
 
         <key>StartCalendarInterval</key>
         <dict>

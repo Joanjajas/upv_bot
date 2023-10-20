@@ -7,7 +7,7 @@ if [ ! -d ~/bot_reservas ]; then
 	mkdir ~/bot_reservas
 fi
 
-sudo cp "$script_dir/bot" /usr/local/reservation_bot
+sudo cp -r "$script_dir/bot" /usr/local/reservation_bot
 /usr/bin/python3 -m pip install playwright
 /usr/bin/python3 -m playwright install chromium
 cp "$plist_file" ~/Library/LaunchAgents/
