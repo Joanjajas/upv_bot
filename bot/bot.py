@@ -11,7 +11,7 @@ PASSWORD = "cuswiw-sukti0-hehbEv"
 
 def run(playwright: Playwright):
     # Get reservations from TOML file
-    reservations = load_from_toml_file("../reservas.toml")
+    reservations = load_from_toml_file("~/bot_reservas/reservas.toml")
 
     # Launch new instance of Chromium and create a new page
     chromium = playwright.chromium

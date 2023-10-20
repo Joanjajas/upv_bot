@@ -46,10 +46,6 @@ class Reservation:
 
 def load_from_toml_file(file_path: str):
     try:
-        # Get the path to the TOML file relative to this script
-        script_dir = os.path.dirname(os.path.abspath(__file__))
-        file_path = os.path.join(script_dir, f"{file_path}")
-
         # Load reservations from TOML file
         data = toml.load(file_path)
         reservations = data.get("reserva", [])
