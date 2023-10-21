@@ -2,6 +2,7 @@
 
 script_dir=$(dirname "$(readlink -f "$0")")
 plist_file="$script_dir/reservation_bot.plist"
+install_dir="/usr/local/reservation_bot"
 
 # Check internet connection
 if ! ping -q -c 2 -W 2 google.com >/dev/null 2>&1; then
@@ -37,14 +38,15 @@ while true; do
 	fi
 done
 
-# Replace the credentials in the script
-sed -i '' "s/USERNAME = \".*\"/USERNAME = \"$username\"/" "$script_dir/bot/bot.py"
-sed -i '' "s/PASSWORD = \".*\"/PASSWORD = \"$password\"/" "$script_dir/bot/bot.py"
-
+# Copy the bot script to the correct directory
 if [ -d /usr/local/reservation_bot ]; then
 	sudo rm -rf /usr/local/reservation_bot
 fi
 sudo cp -r "$script_dir/bot" /usr/local/reservation_bot/
+
+# Replace the credentials in the script
+sudo sed -i '' "s/USERNAME = \".*\"/USERNAME = \"$username\"/" "$install_dir/bot.py"
+sudo sed -i '' "s/PASSWORD = \".*\"/PASSWORD = \"$password\"/" "$install_dir/bot.py"
 
 # Make sure to create the necessary directories and files
 if [ ! -d ~/bot_reservas ]; then
