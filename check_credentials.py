@@ -37,6 +37,10 @@ def check_credentials(page, username, password):
     except AssertionError:
         exit(1)
 
+    except Exception as err:
+        print(err)
+        exit(1)
+
 
 if __name__ == "__main__":
     with sync_playwright() as playwright:

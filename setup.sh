@@ -13,10 +13,17 @@ while true; do
 	read -r -p "DNI: " username
 	read -r -s -p "Contraseña: " password
 
-	credentials_script="$script_dir/check_credentials.py"
+	# Check internet connection
+	if ! ping -q -c 2 -W 2 google.com >/dev/null 2>&1; then
+		printf "No hay conexión a internet.\n"
+		exit 1
+	fi
 
 	printf "\nComprobando que el usuario y la contraseña son correctos...\n"
 
+	credentials_script="$script_dir/check_credentials.py"
+
+	# Check that the credentials are correct
 	if /usr/bin/python3 "$credentials_script" "$username" "$password"; then
 		break
 	else
@@ -24,6 +31,7 @@ while true; do
 	fi
 done
 
+# Replace the credentials in the script
 sed -i '' "s/USERNAME = \".*\"/USERNAME = \"$username\"/" "$script_dir/bot/bot.py"
 sed -i '' "s/PASSWORD = \".*\"/PASSWORD = \"$password\"/" "$script_dir/bot/bot.py"
 
