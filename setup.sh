@@ -3,6 +3,14 @@
 script_dir=$(dirname "$(readlink -f "$0")")
 plist_file="$script_dir/reservation_bot.plist"
 
+# Check internet connection
+if ! ping -q -c 2 -W 2 google.com >/dev/null 2>&1; then
+	printf "No hay conexión a internet.\n"
+	printf "Se necesita conexión a internet para el proceso de setup.\n"
+	printf "Por favor, conectate a internet e inténtalo de nuevo.\n"
+	exit 1
+fi
+
 # Ask for sudo permissions
 sudo -v
 
@@ -16,12 +24,6 @@ while true; do
 	printf "Introduce el usuario y contraseña de la intranet.\n"
 	read -r -p "DNI: " username
 	read -r -s -p "Contraseña: " password
-
-	# Check internet connection
-	if ! ping -q -c 2 -W 2 google.com >/dev/null 2>&1; then
-		printf "No hay conexión a internet.\n"
-		exit 1
-	fi
 
 	printf "\nComprobando que el usuario y la contraseña son correctos...\n"
 
