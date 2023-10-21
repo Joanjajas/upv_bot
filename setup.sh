@@ -43,6 +43,7 @@ check_credentials() {
 			break
 		else
 			printf "The intranet username or password are not valid.\n\n"
+			get_credentials
 		fi
 	done
 }
