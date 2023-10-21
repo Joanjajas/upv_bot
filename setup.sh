@@ -31,13 +31,18 @@ while true; do
 	if /usr/bin/python3 "$credentials_script" "$username" "$password"; then
 		break
 	else
-		printf "El usuario o la contraseña son incorrectos.\n"
+		printf "El usuario o la contraseña son incorrectos.\n\n"
 	fi
 done
 
 # Replace the credentials in the script
 sed -i '' "s/USERNAME = \".*\"/USERNAME = \"$username\"/" "$script_dir/bot/bot.py"
 sed -i '' "s/PASSWORD = \".*\"/PASSWORD = \"$password\"/" "$script_dir/bot/bot.py"
+
+if [ -d /usr/local/reservation_bot ]; then
+	sudo rm -rf /usr/local/reservation_bot
+fi
+sudo cp -r "$script_dir/bot" /usr/local/reservation_bot/
 
 # Make sure to create the necessary directories and files
 if [ ! -d ~/bot_reservas ]; then
@@ -47,11 +52,6 @@ fi
 if [ ! -f ~/bot_reservas/reservas.toml ]; then
 	cp "$script_dir/reservas.toml" ~/bot_reservas/
 fi
-
-if [ ! -d /usr/local/reservation_bot ]; then
-	sudo mkdir /usr/local/reservation_bot
-fi
-sudo cp -r "$script_dir/bot/*" /usr/local/reservation_bot/
 
 # Create the launch agent
 if [ -f ~/Library/LaunchAgents/reservation_bot.plist ]; then
