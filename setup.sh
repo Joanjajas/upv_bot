@@ -3,13 +3,17 @@
 script_dir=$(dirname "$(readlink -f "$0")")
 plist_file="$script_dir/reservation_bot.plist"
 
+# Ask for sudo permissions
+sudo -v
+
 # Install the necessary python dependencies
-/usr/bin/python3 -m pip install playwright
-/usr/bin/python3 -m playwright install chromium
+printf "\nInstalando dependencias...\n"
+/usr/bin/python3 -m pip install playwright >/dev/null
+/usr/bin/python3 -m playwright install chromium >/dev/null
 
 # Get user credentials
 while true; do
-	printf "\nIntroduce el usuario y contraseña de la intranet.\n"
+	printf "Introduce el usuario y contraseña de la intranet.\n"
 	read -r -p "DNI: " username
 	read -r -s -p "Contraseña: " password
 
@@ -45,8 +49,9 @@ if [ ! -f ~/bot_reservas/reservas.toml ]; then
 fi
 
 if [ ! -d /usr/local/reservation_bot ]; then
-	sudo cp -r "$script_dir/bot" /usr/local/reservation_bot
+	sudo mkdir /usr/local/reservation_bot
 fi
+sudo cp -r "$script_dir/bot/*" /usr/local/reservation_bot/
 
 # Create the launch agent
 if [ -f ~/Library/LaunchAgents/reservation_bot.plist ]; then
