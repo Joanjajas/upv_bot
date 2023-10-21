@@ -1,4 +1,4 @@
-#! /bin/sh
+#!/bin/sh
 
 script_dir=$(dirname "$(readlink -f "$0")")
 plist_file="$script_dir/reservation_bot.plist"

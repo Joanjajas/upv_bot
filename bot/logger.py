@@ -3,7 +3,6 @@ import os
 
 
 def log(text: str, level: str = "INFO"):
-    current_time = datetime.datetime.now().strftime("%d/%m/%Y - %H:%M:%S")
     print(text)
 
     home_dir = os.path.expanduser("~")
@@ -14,5 +13,6 @@ def log(text: str, level: str = "INFO"):
 
     log_path = os.path.join(folder_path, "log.txt")
     with open(log_path, "a") as file:
+        current_time = datetime.datetime.now().strftime("%d/%m/%Y - %H:%M:%S")
         file.write(f"[{current_time} - {level}]: {text}\n")
 
