@@ -5,8 +5,8 @@ from logger import log
 
 
 UPV_LOGIN_URL = "https://intranet.upv.es/"
-USERNAME = "20934366"
-PASSWORD = "cuswiw-sukti0-hehbEv"
+USERNAME = ""
+PASSWORD = ""
 
 
 def run(playwright: Playwright):
