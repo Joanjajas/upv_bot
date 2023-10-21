@@ -40,9 +40,9 @@ done
 
 # Copy the bot script to the correct directory
 if [ -d /usr/local/reservation_bot ]; then
-	sudo rm -rf /usr/local/reservation_bot
+	sudo rm -rf "$install_dir"
 fi
-sudo cp -r "$script_dir/bot" /usr/local/reservation_bot/
+sudo cp -r "$script_dir/bot" "$install_dir"
 
 # Replace the credentials in the script
 sudo sed -i '' "s/USERNAME = \".*\"/USERNAME = \"$username\"/" "$install_dir/bot.py"
