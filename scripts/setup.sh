@@ -1,7 +1,8 @@
 #!/bin/sh
 
-script_dir=$(dirname "$(readlink -f "$0")")
-plist_file="$script_dir/reservation_bot.plist"
+scripts_dir=$(dirname "$(readlink -f "$0")")
+root_dir=$(dirname "$scripts_dir")
+plist_file="$root_dir/reservation_bot.plist"
 install_dir="/usr/local/reservation_bot"
 
 main() {
@@ -37,7 +38,7 @@ check_credentials() {
 	while true; do
 		printf "\nChecking if the intranet username and password are valid...\n"
 
-		credentials_script="$script_dir/check_credentials.py"
+		credentials_script="$scripts_dir/check_credentials.py"
 
 		if /usr/bin/python3 "$credentials_script" "$username" "$password"; then
 			break
@@ -53,7 +54,7 @@ install_script() {
 	if [ -d /usr/local/reservation_bot ]; then
 		sudo rm -rf "$install_dir"
 	fi
-	sudo cp -r "$script_dir/bot" "$install_dir"
+	sudo cp -r "$root_dir/bot" "$install_dir"
 }
 
 # Replace the credentials in the script
@@ -69,7 +70,7 @@ create_dirs() {
 	fi
 
 	if [ ! -f ~/bot_reservas/reservas.toml ]; then
-		cp "$script_dir/reservas.toml" ~/bot_reservas/
+		cp "$root_dir/reservas.toml" ~/bot_reservas/
 	fi
 }
 
