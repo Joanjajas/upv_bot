@@ -20,6 +20,7 @@ install_deps() {
 	printf "\nInstalling dependencies...\n"
 	/usr/bin/python3 -m pip install playwright >/dev/null
 	/usr/bin/python3 -m playwright install chromium >/dev/null
+	/usr/bin/python3 -m pip install toml
 }
 
 # Prompt for username and password
