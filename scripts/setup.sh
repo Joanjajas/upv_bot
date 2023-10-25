@@ -8,13 +8,13 @@ install_dir="/usr/local/reservation_bot"
 # Prompt for the sudo password
 sudo -v
 
-# Check for internet connection
-if ! ping -q -c 2 -W 2 google.com >/dev/null 2>&1; then
-	printf "There is no internet connection.\n"
-	printf "Internet connection is needed for running this setup script.\n"
-	printf "Please, connect to the internet and try again.\n"
-	exit 1
-fi
+# # Check for internet connection
+# if ! ping -q -c 2 -W 2 google.com >/dev/null 2>&1; then
+# 	printf "There is no internet connection.\n"
+# 	printf "Internet connection is needed for running this setup script.\n"
+# 	printf "Please, connect to the internet and try again.\n"
+# 	exit 1
+# fi
 
 # Install the necessary python dependencies
 printf "Installing dependencies...\n"
