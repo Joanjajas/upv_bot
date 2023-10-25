@@ -31,8 +31,9 @@ class Reservation:
                 "row", name=f"{self.time} Libre", exact=True
             ).get_by_role("link").click()
 
-            page.get_by_role("button", name="Cancel").click()
-            log(str(self))
+            page.get_by_role("button", name="Confirm").click()
+            input("Press Enter to continue...")
+            log(f"Reservada {self}")
 
         except Exception:
             log(
@@ -41,7 +42,7 @@ class Reservation:
             )
 
     def __str__(self):
-        return f"Reservada pista de {self.sport} el {self.date} de {self.time} en la pista {self.court}"
+        return f"Pista de {self.sport} el {self.date} de {self.time} en la pista {self.court}"
 
 
 def load_from_toml_file(file_path: str):
