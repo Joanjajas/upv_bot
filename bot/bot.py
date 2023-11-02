@@ -5,8 +5,8 @@ from logger import log
 
 
 UPV_LOGIN_URL = "https://intranet.upv.es/"
-USERNAME = "20934366"
-PASSWORD = "cuswiw-sukti0-hehbEv"
+USERNAME = ""
+PASSWORD = ""
 
 
 def run(playwright: Playwright):
@@ -15,7 +15,7 @@ def run(playwright: Playwright):
 
     # Launch new instance of Chromium and create a new page
     chromium = playwright.chromium
-    browser = chromium.launch(headless=False)
+    browser = chromium.launch()
     page = browser.new_page()
 
     # Set default timeout to 5 seconds
