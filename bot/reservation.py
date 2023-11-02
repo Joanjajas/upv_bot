@@ -12,7 +12,7 @@ class Reservation:
         self.time = time
         self.court = court
 
-    def reserve(self, page: Page):
+    def make(self, page: Page):
         try:
             # Select the sport
             page.locator(f"//select[@name='deporte']").select_option(self.sport)
@@ -31,13 +31,14 @@ class Reservation:
                 "row", name=f"{self.time} Libre", exact=True
             ).get_by_role("link").click()
 
+            # Confirm reservation
             page.get_by_role("button", name="Confirm").click()
-            input("Press Enter to continue...")
+
             log(f"Reservada {self}")
 
         except Exception:
             log(
-                f"Error al reservar la pista de {self.sport}: La pista ya está reservada",
+                f"Error al reservar la pista de {self.sport}: La pista no esta disponible",
                 level="WARNING",
             )
 

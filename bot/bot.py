@@ -13,6 +13,11 @@ def run(playwright: Playwright):
     # Get reservations from toml file
     reservations = load_from_toml_file("bot_reservas/reservas.toml")
 
+    # Exit the program if no reservations were found
+    if len(reservations) == 0:
+        log("No se han encontrado reservas para realizar", level="WARNING")
+        exit(0)
+
     # Launch new instance of Chromium and create a new page
     chromium = playwright.chromium
     browser = chromium.launch()
@@ -29,7 +34,7 @@ def run(playwright: Playwright):
 
     # Make all reservations
     for reservation in reservations:
-        reservation.reserve(page)
+        reservation.make(page)
 
 
 def login(page: Page, username: str, password: str):
