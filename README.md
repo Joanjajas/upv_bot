@@ -1,6 +1,6 @@
 Bot para reservas pistas de deporte de la UPV.
 
-# Instalación local (Únicamente Macos de momento)
+# Instalación local (Únicamente MacOs de momento)
 
 Para instalar localmente el bot únicamente hay que ejecuatar el script de instalación que se encargará de instalar todas las dependencias y de crear las carpetas necesarias.
 
