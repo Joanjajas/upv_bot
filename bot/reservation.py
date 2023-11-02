@@ -34,6 +34,9 @@ class Reservation:
             # Confirm reservation
             page.get_by_role("button", name="Confirm").click()
 
+            # Go back to the main page
+            page.get_by_role("button", name="Volver").click()
+
             log(f"Reservada {self}")
 
         except Exception:
