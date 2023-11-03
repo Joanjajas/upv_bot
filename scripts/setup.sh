@@ -4,6 +4,7 @@ scripts_dir=$(dirname "$(readlink -f "$0")")
 root_dir=$(dirname "$scripts_dir")
 plist_file="$root_dir/reservation_bot.plist"
 install_dir="/usr/local/reservation_bot"
+program_dir="$HOME/bot_reservas"
 
 # Prompt for the sudo password
 sudo -v
@@ -51,11 +52,11 @@ sudo sed -i '' "s/USERNAME = \".*\"/USERNAME = \"$username\"/" "$install_dir/bot
 sudo sed -i '' "s/PASSWORD = \".*\"/PASSWORD = \"$password\"/" "$install_dir/bot.py"
 
 # Create the necessary directories and files
-if [ ! -d ~/bot_reservas ]; then
+if [ ! -d "$program_dir" ]; then
 	mkdir ~/bot_reservas
 fi
 
-if [ ! -f ~/bot_reservas/reservas.toml ]; then
+if [ ! -f "$program_dir"/reservas.toml ]; then
 	cp "$root_dir/reservas.toml" ~/bot_reservas/
 fi
 

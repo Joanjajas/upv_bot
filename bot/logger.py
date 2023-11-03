@@ -6,13 +6,12 @@ def log(text: str, level: str = "INFO"):
     print(text)
 
     home_dir = os.path.expanduser("~")
-    folder_path = os.path.join(home_dir, "bot_reservas")
+    program_folder = os.path.join(home_dir, "bot_reservas")
 
-    if not os.path.exists(folder_path):
-        os.makedirs(folder_path)
+    if not os.path.exists(program_folder):
+        os.makedirs(program_folder)
 
-    log_path = os.path.join(folder_path, "log.txt")
-    with open(log_path, "a") as file:
+    log_file = os.path.join(program_folder, "log.txt")
+    with open(log_file, "a") as file:
         current_time = datetime.datetime.now().strftime("%d/%m/%Y - %H:%M:%S")
         file.write(f"[{current_time} - {level}]: {text}\n")
-
