@@ -9,19 +9,19 @@ program_dir="$HOME/bot_reservas"
 # Prompt for the sudo password
 sudo -v
 
-# # Check for internet connection
-# if ! ping -q -c 2 -W 2 google.com >/dev/null 2>&1; then
-# 	printf "There is no internet connection.\n"
-# 	printf "Internet connection is needed for running this setup script.\n"
-# 	printf "Please, connect to the internet and try again.\n"
-# 	exit 1
-# fi
+# Check for internet connection
+if ! ping -q -c 2 -W 2 google.com >/dev/null 2>&1; then
+	printf "There is no internet connection.\n"
+	printf "Internet connection is needed for running this setup script.\n"
+	printf "Please, connect to the internet and try again.\n"
+	exit 1
+fi
 
 # Install the necessary python dependencies
 printf "Installing dependencies...\n"
-/usr/bin/python3 -m pip install toml >/dev/null
-/usr/bin/python3 -m pip install playwright >/dev/null
-/usr/bin/python3 -m playwright install chromium >/dev/null
+python3 -m pip install toml >/dev/null
+python3 -m pip install playwright >/dev/null
+python3 -m playwright install chromium >/dev/null
 
 # Get user credentials
 printf "\nIntroduce your intranet username and password:\n"
