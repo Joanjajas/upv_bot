@@ -15,7 +15,7 @@ class Reservation:
     def make(self, page: Page):
         try:
             # Select the sport
-            page.locator(f"//select[@name='deporte']").select_option(self.sport)
+            page.locator("//select[@name='deporte']").select_option(self.sport)
 
             # Select the day
             page.get_by_role("button", name=self.date).click()

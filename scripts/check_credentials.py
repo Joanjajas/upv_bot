@@ -26,10 +26,10 @@ def check_credentials(page, username, password):
         page.goto(UPV_LOGIN_URL)
 
         # Fill login form and submit
-        form = page.locator("form[name='alumno']")
-        form.locator("input[name='dni']").fill(username)
-        form.locator("input[name='clau']").fill(password)
-        form.locator("input[type='submit']").click()
+        form = page.locator("form[id='fm1']")
+        form.locator("input[name='username']").fill(username)
+        form.locator("input[name='password']").fill(password)
+        form.locator("button[name='submitBtn']").click()
 
         # Check if login was successful
         assert page.title() == "Mi UPV"

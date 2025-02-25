@@ -32,7 +32,7 @@ def run(playwright: Playwright):
 
     log("Reservando pistas...")
 
-    # Make all reservations
+    page.set_default_timeout(500)
     for reservation in reservations:
         reservation.make(page)
 

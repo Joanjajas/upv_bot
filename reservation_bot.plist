@@ -7,7 +7,7 @@
 
         <key>ProgramArguments</key>
         <array>
-            <string>/usr/bin/python3</string>
+            <string>/Users/joan/dev/upv_bot/venv/upv_bot/bin/python</string>
             <string>/usr/local/reservation_bot/bot.py</string>
         </array>
 
@@ -15,16 +15,11 @@
         <false/>
 
         <key>StartCalendarInterval</key>
-        <dict>
-            <key>Weekday</key>
-            <integer>4</integer>
-
-            <key>Hour</key>
-            <integer>8</integer>
-
-            <key>Minute</key>
-            <integer>0</integer>
-        </dict>
+        <array>
+            <dict><key>Hour</key><integer>0</integer><key>Minute</key><integer>0</integer></dict>
+            <dict><key>Hour</key><integer>0</integer><key>Minute</key><integer>1</integer></dict>
+            <dict><key>Hour</key><integer>0</integer><key>Minute</key><integer>2</integer></dict>
+        </array>
     </dict>
 </plist>
 
